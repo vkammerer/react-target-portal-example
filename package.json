@@ -7,6 +7,7 @@
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.3"
   },
+  "homepage": "https://vkammerer.github.io/react-target-portal-example",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf docs && mv build docs",
