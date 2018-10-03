@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import TargetPortal from "./TargetPortal";
 
 class App extends Component {
-  state = { targetColor: "blue" };
+  state = {};
   componentDidMount() {
+    this.setState({ targetColor: "blue" });
     this.interval = setInterval(() => {
       this.setState({
         targetColor: this.state.targetColor === "red" ? "blue" : "red",
