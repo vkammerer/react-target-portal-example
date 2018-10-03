@@ -1,25 +1,47 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import TargetPortal from "./TargetPortal";
 
 class App extends Component {
+  state = { targetColor: "blue" };
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      this.setState({
+        targetColor: this.state.targetColor === "red" ? "blue" : "red",
+      });
+    }, 2000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <TargetPortal
+          predicate={this.state.targetColor}
+          targets={[
+            {
+              case: "blue",
+              ref: this.blueDiv,
+            },
+            {
+              case: "red",
+              ref: this.redDiv,
+            },
+          ]}
+        >
+          <div>TargetPortal child</div>
+        </TargetPortal>
+        <div
+          style={{ color: "white", backgroundColor: "blue" }}
+          ref={ref => (this.blueDiv = ref)}
+        />
+        <div>
+          Target will switch from the blue div to the red div every 2 seconds
+        </div>
+        <div
+          style={{ color: "white", backgroundColor: "red" }}
+          ref={ref => (this.redDiv = ref)}
+        />
       </div>
     );
   }
